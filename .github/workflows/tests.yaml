@@ -1,0 +1,57 @@
+name: Tests
+
+on:
+  push:
+    branches: [master, use-github-actions]
+  pull_request:
+    branches: [master]
+
+jobs:
+  tests:
+    strategy:
+      matrix:
+        php-versions: ['7.2', '7.3']
+
+    runs-on: ubuntu-latest
+
+    env:
+      PDO_DSN: "mysql:host=localhost;dbname=bav"
+      PDO_USER: github
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup PHP with Xdebug
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-versions }}
+          extensions: mbstring, intl, pdo_mysql
+          tools: phpunit
+          coverage: xdebug
+
+      - name: Validate composer.json and composer.lock
+        run: composer validate --strict
+
+      - name: Cache Composer packages
+        id: composer-cache
+        uses: actions/cache@v3
+        with:
+          path: vendor
+          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-php-
+
+      - name: Install dependencies
+        run: composer install --dev --prefer-dist --no-progress --no-interaction
+
+      - name: Prepare tests
+        run: |
+          mysql -e 'SET @@GLOBAL.wait_timeout=1200'
+          mysql -e 'create database bav;'
+          php tests/bin/test-install.php
+
+      - name: Run tests
+        run: vendor/bin/phpunit tests/unit/
+
+      - name: Run large tests
+        run: vendor/bin/phpunit --exclude-group large tests/unit-large/
