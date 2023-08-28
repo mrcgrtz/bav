@@ -53,7 +53,6 @@ class Validator69 extends ValidatorChain
     {
         if ($validator === $this->validators[0] && ($this->account >= 9700000000 && $this->account <= 9799999999)) {
             return false;
-
         }
         return true;
     }

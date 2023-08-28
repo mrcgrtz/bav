@@ -68,7 +68,6 @@ abstract class TestAPI
         
         if (! $this->isAvailable()) {
             throw new TestAPIUnavailableException();
-
         }
     }
 
@@ -91,14 +90,12 @@ abstract class TestAPI
                     ? TestAPIResult::VALID
                     : TestAPIResult::INVALID;
             return new TestAPIResult($this, $result);
-
         } catch (Exception $e) {
             return new TestAPIErrorResult(
                 $this,
                 TestAPIResult::ERROR,
                 $e->getMessage()
             );
-
         }
     }
 

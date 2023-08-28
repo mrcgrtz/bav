@@ -33,19 +33,15 @@ try {
     // Use PHP's validation filter
     if (filter_var("10000000", FILTER_CALLBACK, $bav->getValidBankFilterCallback())) {
         echo "Bank 10000000 is valid.\n";
-        
     } else {
         echo "Bank 10000000 is invalid.\n";
-        
     }
     
     // Account filter validation needs a previous call to the bank filter.
     if (filter_var("12345", FILTER_CALLBACK, $bav->getValidAccountFilterCallback())) {
         echo "Account 12345 is valid.\n";
-        
     } else {
         echo "Account 12345 is invalid.\n";
-        
     }
     
     // Print name of the bank
@@ -56,10 +52,8 @@ try {
      * Are there any more agencies?
      */
     print_r($bav->getAgencies("10000000"));
-
 } catch (BAVException $error) {
     die("Some error happened in the data backend.");
-
 }
 
 /**
@@ -75,7 +69,7 @@ try {
      * Create the PDO container. If you intend to do so you should
      * create the file bav/configuration.php and return a Configuration which
      * uses PDODataBackendContainer.
-     * 
+     *
      * @see ConfigurationRegistry
      */
     $backendContainer = new PDODataBackendContainer(
@@ -90,7 +84,6 @@ try {
     $agencies = $backend->getAgencies("SELECT id FROM {$backend->getPrefix()}agency LIMIT 10");
     foreach ($agencies as $agency) {
         echo "Found agency {$agency->getPostcode()} of bank {$agency->getBank()->getBankID()}\n";
-
     }
 
     /**
@@ -104,10 +97,7 @@ try {
     );
     foreach ($agencies as $agency) {
         echo "{$agency->getBank()->getBankID()} ({$agency->getName()}, {$agency->getCity()})\n";
-
     }
-
 } catch (BAVException $error) {
     die($error->getTraceAsString());
-
 }

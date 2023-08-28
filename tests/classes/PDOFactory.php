@@ -40,19 +40,16 @@ class PDOFactory
         $dsn = getenv(self::ENV_DSN);
         if (! $dsn) {
             $dsn = "mysql:host=localhost;dbname=test";
-
         }
 
         $user = getenv(self::ENV_USER);
         if (! $user) {
             $user = "test";
-
         }
 
         $password = getenv(self::ENV_PASSWORD);
         if (! $password) {
             $password = null;
-
         }
 
         $pdo = new \PDO($dsn, $user, $password);

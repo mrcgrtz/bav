@@ -36,7 +36,6 @@ class KtoblzcheckTestAPI extends TestAPI
     {
         if (! is_null($bankdata)) {
             $this->bankdata = realpath($bankdata);
-
         }
         $this->binary = is_null($binary) ? self::BINARY : realpath($binary);
 
@@ -55,7 +54,6 @@ class KtoblzcheckTestAPI extends TestAPI
     {
         if ($account == 0) {
             return true;
-
         }
 
         /* In version 1.45 those do differ:
@@ -71,7 +69,6 @@ class KtoblzcheckTestAPI extends TestAPI
         $falsePositives = array("63", "C7", "08", "09", "68", "E1", "78");
         if (in_array($bank->getValidationType(), array($falsePositives))) {
             return true;
-
         }
 
         return parent::ignoreTestCase($bank, $account);
@@ -113,7 +110,6 @@ class KtoblzcheckTestAPI extends TestAPI
 
             default:
                 throw new ValidationTestAPIException("unknown code $result: " . implode("\n", $out));
-
         }
     }
 }

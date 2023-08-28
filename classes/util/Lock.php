@@ -37,7 +37,6 @@ class Lock
         $this->handle = fopen($lockFile, "w");
         if (! is_resource($this->handle)) {
             throw new LockException("Could not open lock file $lockFile.");
-
         }
     }
 
@@ -56,16 +55,13 @@ class Lock
         try {
             if (! $isBlocked) {
                 call_user_func($task);
-
             }
         } catch (\Exception $e) {
             $error = $e;
-
         }
         $this->unlock();
         if (! is_null($error)) {
             throw $error;
-
         }
     }
 
@@ -81,20 +77,16 @@ class Lock
     {
         if (! $this->nonblockingLock()) {
             return;
-
         }
         $error = null;
         try {
             call_user_func($task);
-
         } catch (\Exception $e) {
             $error = $e;
-
         }
         $this->unlock();
         if (! is_null($error)) {
             throw $error;
-
         }
     }
 
@@ -107,7 +99,6 @@ class Lock
     {
         if (! flock($this->handle, LOCK_EX)) {
             throw new LockException("flock() failed for {$this->name}.");
-
         }
     }
 
@@ -132,7 +123,6 @@ class Lock
         $isLocked = ! flock($this->handle, LOCK_EX | LOCK_NB);
         if ($isLocked) {
             $this->lock();
-
         }
         return $isLocked;
     }
@@ -144,7 +134,6 @@ class Lock
     {
         if (! flock($this->handle, LOCK_UN)) {
             throw new LockException("flock() failed releasing {$this->name}.");
-
         }
     }
 }

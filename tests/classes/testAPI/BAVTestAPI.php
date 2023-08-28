@@ -56,11 +56,9 @@ class BAVTestAPI extends TestAPI
     {
         try {
             return $bank->isValid($account);
-
         } catch (Exception $e) {
             echo $e->getMessage(), "\n", $e->getTraceAsString();
             exit(1);
-
         }
     }
 }

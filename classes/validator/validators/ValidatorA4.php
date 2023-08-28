@@ -51,10 +51,8 @@ class ValidatorA4 extends ValidatorChain
         if (substr($this->account, 2, 2) == '99') {
             return $validator === $this->validators[2]
                 || $validator === $this->validators[3];
-
         } else {
             return  $validator !== $this->validators[2];
-
         }
     }
 }

@@ -64,13 +64,10 @@ class Validator79 extends Validator
     {
         if (array_search($this->account[0], array(1, 2, 9)) !== false) {
             $this->validator = $this->mode2;
-
         } elseif ($this->account[0] == 0) {
             $this->validator = null;
-
         } else {
             $this->validator = $this->mode1;
-
         }
     }
 

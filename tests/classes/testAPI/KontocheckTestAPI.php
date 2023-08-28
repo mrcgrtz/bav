@@ -32,17 +32,14 @@ class KontocheckTestAPI extends TestAPI
 
         if (is_null($lutFile)) {
             $lutFile = __DIR__ . "/../../data/blz.lut2";
-
         }
 
         if (is_null($lutVersion)) {
             $lutVersion = 2;
-
         }
 
         if (! lut_init($lutFile, $lutVersion)) {
             throw new TestAPIException("Could not initialize LUT.");
-
         }
     }
 
@@ -56,13 +53,11 @@ class KontocheckTestAPI extends TestAPI
         // http://sourceforge.net/p/kontocheck/bugs/11/
         if ($bank->getBankID() == "80063508") {
             return true;
-
         }
 
         // http://sourceforge.net/p/kontocheck/bugs/12/
         if ($bank->getValidationType() == "90") {
             return true;
-
         }
 
         return parent::ignoreTestCase($bank, $account);
@@ -105,10 +100,8 @@ class KontocheckTestAPI extends TestAPI
             default:
                 if ($isValid < 0) {
                     throw new ValidationTestAPIException("unknown code $isValid");
-
                 }
                 return true;
-
         }
     }
 }

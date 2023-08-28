@@ -29,7 +29,6 @@ class Validator88 extends Validator06
         parent::__construct($bank);
 
         $this->setWeights(array(2, 3, 4, 5, 6, 7, 8));
-
     }
 
     protected function init($account)

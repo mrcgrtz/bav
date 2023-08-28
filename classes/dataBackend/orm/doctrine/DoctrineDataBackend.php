@@ -36,14 +36,11 @@ class DoctrineDataBackend extends SQLDataBackend
             $bank = $this->em->find('malkusch\bav\Bank', $bankID);
             if ($bank == null) {
                 throw new BankNotFoundException($bankID);
-
             }
             $bank->setDataBackend($this);
             return $bank;
-            
         } catch (ORMException $e) {
             throw new DataBackendException($e);
-            
         }
     }
 
@@ -76,7 +73,6 @@ class DoctrineDataBackend extends SQLDataBackend
         $lastModified = $this->em->find("malkusch\bav\MetaData", MetaData::LASTMODIFIED);
         if ($lastModified == null) {
             throw new DataBackendException();
-            
         }
         return $lastModified->getValue();
     }
@@ -110,10 +106,8 @@ class DoctrineDataBackend extends SQLDataBackend
         try {
             $this->em->find("malkusch\bav\MetaData", MetaData::LASTMODIFIED);
             return true;
-            
         } catch (DBALException $e) {
             return false;
-            
         }
     }
 
@@ -147,7 +141,6 @@ class DoctrineDataBackend extends SQLDataBackend
                     $agencies[] = $bank->getMainAgency();
                     foreach ($agencies as $agency) {
                         $em->persist($agency);
-                        
                     }
                 } catch (NoMainAgencyException $e) {
                     trigger_error(
@@ -160,7 +153,6 @@ class DoctrineDataBackend extends SQLDataBackend
             $lastModified = $em->find("malkusch\bav\MetaData", MetaData::LASTMODIFIED);
             if ($lastModified == null) {
                 $lastModified = new MetaData();
-                
             }
             $lastModified->setName(MetaData::LASTMODIFIED);
             $lastModified->setValue(time());
@@ -195,14 +187,12 @@ class DoctrineDataBackend extends SQLDataBackend
             foreach ($stmt as $result) {
                 if (! array_key_exists('id', $result)) {
                     throw new MissingAttributesDataBackendIOException();
-
                 }
                 $id = $result["id"];
                 $agency = $em->find("malkusch\bav\Agency", $id);
                 $agencies[] = $agency;
                 
                 $agency->getBank()->setDataBackend($backend);
-
             }
         });
         return $agencies;

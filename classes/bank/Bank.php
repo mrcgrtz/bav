@@ -108,7 +108,6 @@ class Bank
     {
         if (is_null($this->mainAgency)) {
             $this->mainAgency = $this->dataBackend->getMainAgency($this);
-
         }
         return $this->mainAgency;
     }
@@ -123,7 +122,6 @@ class Bank
     {
         if (is_null($this->agencies)) {
             $this->agencies = $this->dataBackend->getAgenciesForBank($this);
-
         }
         return $this->agencies;
     }
@@ -155,7 +153,6 @@ class Bank
         if (is_null($this->validator)) {
             $factory = new ValidatorFactory();
             $this->validator = $factory->build($this);
-
         }
         return $this->validator;
     }

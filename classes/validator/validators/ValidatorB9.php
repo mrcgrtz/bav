@@ -57,7 +57,6 @@ class ValidatorB9 extends Validator
         if (! preg_match('~^000?[^0]~', $this->account)) {
             $this->validator = null;
             return;
-
         }
         $this->validator = substr($this->account, 0, 3) === '000'
                          ? $this->mode2

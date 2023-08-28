@@ -20,8 +20,6 @@ try {
     $databack = $configuration->getDatabackendContainer()->getDataBackend();
     $databack->uninstall();
     echo "Bundesbank file removed.\n";
-
 } catch (DataBackendException $error) {
     die("Deinstallation failed: {$error->getMessage()}\n");
-
 }

@@ -39,10 +39,8 @@ class Validator65 extends Validator00
 
         if ($this->account[8] == 9) {
             $this->setEnd(-1);
-
         } else {
             $this->setEnd(6);
-
         }
     }
 }

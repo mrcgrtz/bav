@@ -31,7 +31,6 @@ class FileValidator
                 "Get updated BAV version:"
                 . " file size should not be less than " . self::FILESIZE . " but was $size."
             );
-
         }
 
         // check line length
@@ -41,19 +40,16 @@ class FileValidator
                 "Get updated BAV version:"
                 . " Line length shouldn't be less than $minLength but was {$parser->getLineLength()}."
             );
-
         }
 
         // rough check that line length is constant.
         if ($size % $parser->getLineLength() != 0) {
             throw new InvalidLineLengthException("Get updated BAV version: Line length is not constant.");
-
         }
 
         $firstLine = $parser->readLine(0);
         if (! preg_match("/^100000001Bundesbank/", $firstLine)) {
             throw new FieldException("Get updated BAV version: first line has unexpected content: $firstLine");
-
         }
     }
 }

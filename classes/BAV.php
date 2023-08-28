@@ -47,7 +47,6 @@ class BAV
     {
         if (is_null($configuration)) {
             $configuration = ConfigurationRegistry::getConfiguration();
-
         }
         $this->configuration = $configuration;
 
@@ -97,10 +96,8 @@ class BAV
         try {
             $bank = $this->getBank($bankID);
             return $bank->isValid($account);
-
         } catch (BankNotFoundException $e) {
             return false;
-
         }
     }
 

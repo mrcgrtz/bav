@@ -71,7 +71,6 @@ class ISO8859Encoding extends Encoding
     {
         if ($from_encoding == $this->enc) {
             return $string;
-
         }
         throw new EncodingException();
     }

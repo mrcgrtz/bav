@@ -61,7 +61,6 @@ class FileDataBackend extends DataBackend
                 FileParser::BANKID_OFFSET,
                 FileParser::BANKID_LENGTH
             );
-            
         }
         return $this->index;
     }
@@ -94,7 +93,6 @@ class FileDataBackend extends DataBackend
         $lines = file($file);
         if (! is_array($lines) || empty($lines)) {
             throw new DataBackendIOException("Could not read lines in '$file'.");
-
         }
 
         //build a sorted index for the bankIDs
@@ -102,7 +100,6 @@ class FileDataBackend extends DataBackend
         foreach ($lines as $line => $data) {
             $bankID = substr($data, FileParser::BANKID_OFFSET, FileParser::BANKID_LENGTH);
             $index[$line] = $bankID;
-
         }
         asort($index);
 
@@ -111,7 +108,6 @@ class FileDataBackend extends DataBackend
         $tempH   = fopen($temp, 'w');
         if (! ($temp && $tempH)) {
             throw new DataBackendIOException("Could not open a temporary file.");
-
         }
         foreach (array_keys($index) as $line) {
             $data = $lines[$line];
@@ -119,9 +115,7 @@ class FileDataBackend extends DataBackend
             $writtenBytes = fputs($tempH, $data);
             if ($writtenBytes != strlen($data)) {
                 throw new DataBackendIOException("Could not write sorted data: '$data' into $temp.");
-
             }
-
         }
         fclose($tempH);
         $this->fileUtil->safeRename($temp, $file);
@@ -135,7 +129,6 @@ class FileDataBackend extends DataBackend
     {
         if (! unlink($this->parser->getFile())) {
             throw new DataBackendIOException();
-
         }
     }
 
@@ -167,20 +160,18 @@ class FileDataBackend extends DataBackend
 
         if (strlen($path) > 0 && $path[0] != "/") {
             $path = sprintf("/%s/%s", dirname(self::DOWNLOAD_URI), $path);
-
         }
         $pathParts = explode('/', $path);
         foreach ($pathParts as $i => $part) {
             switch ($part) {
-            case '..':
-                unset($pathParts[$i-1]);
-                // fall-through as the current part ("..") should be removed as well.
+                case '..':
+                    unset($pathParts[$i-1]);
+                    // fall-through as the current part ("..") should be removed as well.
 
-            case '.':
-                unset($pathParts[$i]);
-                break;
+                case '.':
+                    unset($pathParts[$i]);
+                    break;
             }
-
         }
         $path = implode('/', $pathParts);
         $urlParts = parse_url(self::DOWNLOAD_URI);
@@ -198,7 +189,6 @@ class FileDataBackend extends DataBackend
         $lastBankID = $parser->getBankID($parser->getLines());
         if ($lastBankID < 80000000) {
             $this->sortFile($file);
-
         }
 
         $this->fileUtil->safeRename($file, $this->parser->getFile());
@@ -217,7 +207,6 @@ class FileDataBackend extends DataBackend
             for ($i = 0; $i < $this->parser->getLines(); $i++) {
                 if (isset($this->instances[$this->parser->getBankID($i)])) {
                     continue;
-
                 }
                 $line = $this->parser->readLine($i);
                 $bank = $this->parser->getBank($this, $line);
@@ -225,13 +214,10 @@ class FileDataBackend extends DataBackend
                 $this->contextCache[$bank->getBankID()] = new FileParserContext($i);
             }
             return array_values($this->instances);
-
         } catch (FileParserIOException $e) {
             throw new DataBackendIOException($e->getMessage(), $e->getCode(), $e);
-
         } catch (FileParserException $e) {
             throw new DataBackendException($e->getMessage(), $e->getCode(), $e);
-
         }
     }
 
@@ -249,20 +235,16 @@ class FileDataBackend extends DataBackend
         
             if ($result == null) {
                 throw new BankNotFoundException($bankID);
-
             }
 
             $line = $result->getOffset() / $this->parser->getLineLength();
             $this->contextCache[$bankID] = new FileParserContext($line);
 
             return $this->parser->getBank($this, $this->parser->readLine($line));
-
         } catch (FileParserException $e) {
             throw new DataBackendIOException($e->getMessage(), $e->getCode(), $e);
-
         } catch (IndexException $e) {
             throw new DataBackendIOException($e->getMessage(), $e->getCode(), $e);
-            
         }
     }
 
@@ -280,21 +262,16 @@ class FileDataBackend extends DataBackend
                 $content = $this->parser->readLine($line);
                 if ($this->parser->isMainAgency($content)) {
                     return $this->parser->getAgency($bank, $content);
-
                 }
             }
             // Maybe there are banks without a main agency
             throw new NoMainAgencyException($bank);
-
         } catch (UndefinedFileParserContextException $e) {
             throw new \LogicException("Start and end should be defined.");
-
         } catch (FileParserIOException $e) {
             throw new DataBackendIOException("Parser Exception at bank {$bank->getBankID()}");
-
         } catch (ParseException $e) {
             throw new DataBackendException(get_class($e) . ": " . $e->getMessage());
-
         }
     }
 
@@ -313,20 +290,15 @@ class FileDataBackend extends DataBackend
                 $content = $this->parser->readLine($line);
                 if (! $this->parser->isMainAgency($content)) {
                     $agencies[] = $this->parser->getAgency($bank, $content);
-
                 }
             }
             return $agencies;
-
         } catch (UndefinedFileParserContextException $e) {
             throw new \LogicException("Start and end should be defined.");
-
         } catch (FileParserIOException $e) {
             throw new DataBackendIOException();
-
         } catch (ParseException $e) {
             throw new DataBackendException();
-
         }
     }
 
@@ -337,7 +309,6 @@ class FileDataBackend extends DataBackend
     {
         if (! isset($this->contextCache[$bankID])) {
             throw new \LogicException("The contextCache object should exist!");
-
         }
         $context = $this->contextCache[$bankID];
         /**
@@ -347,11 +318,9 @@ class FileDataBackend extends DataBackend
             for ($start = $context->getLine() - 1; $start >= 0; $start--) {
                 if ($this->parser->getBankID($start) != $bankID) {
                     break;
-
                 }
             }
             $context->setStart($start + 1);
-
         }
         /**
          * Find end
@@ -360,11 +329,9 @@ class FileDataBackend extends DataBackend
             for ($end = $context->getLine() + 1; $end <= $this->parser->getLines(); $end++) {
                 if ($this->parser->getBankID($end) != $bankID) {
                     break;
-
                 }
             }
             $context->setEnd($end - 1);
-
         }
         return $context;
     }
@@ -382,7 +349,6 @@ class FileDataBackend extends DataBackend
             return new DataBackendException(
                 "Could not read modification time from {$this->parser->getFile()}"
             );
-
         }
         return $time;
     }
@@ -414,7 +380,6 @@ class FileDataBackend extends DataBackend
             foreach ($bankAgencies as $agency) {
                 if ($agency->hasBIC() && $agency->getBIC() == $bic) {
                     $agencies[] = $agency;
-
                 }
             }
         }

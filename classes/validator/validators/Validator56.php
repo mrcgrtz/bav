@@ -41,7 +41,6 @@ class Validator56 extends WeightedIterationValidator
         $result = 11 - ($this->accumulator % 11);
         if ($this->account[0] == 9 && $result >= 10) {
             $result -= 3;
-
         }
         return (string)$result === $this->getCheckNumber();
     }

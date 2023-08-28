@@ -41,10 +41,8 @@ class Validator31 extends WeightedIterationValidator
         $result = $this->accumulator % 11;
         if ($result == 11) {
             $result = 0;
-
         } elseif ($result == 10) {
             return false;
-
         }
         return (string)$result === $this->getCheckNumber();
     }

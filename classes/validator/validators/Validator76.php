@@ -37,7 +37,6 @@ class Validator76 extends WeightedIterationValidator
     {
         if (parent::isValid($account)) {
             return true;
-
         }
         $account = ltrim($account, '0') . '00';
         return strlen($account) <= $this->normalizedSize

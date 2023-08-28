@@ -125,7 +125,6 @@ class Validator57 extends Validator
                     default:
                         $this->validator = $this->mode1;
                         break;
-
                 }
                 break;
 
@@ -161,29 +160,23 @@ class Validator57 extends Validator
 
         if ($firstTwo == '00') {
             return 0;
-
         }
 
         if (isset($this->modeMap[$firstTwo])) {
             return $this->modeMap[$firstTwo];
-
         }
 
         if ($firstTwo >= 73 && $firstTwo <= 82) {
             return 1;
-
         } elseif (($firstTwo >= 32 && $firstTwo <= 39)
                || ($firstTwo >= 41 && $firstTwo <= 49)
                || ($firstTwo >= 56 && $firstTwo <= 60)
                || ($firstTwo >= 83 && $firstTwo <= 87)) {
             return 2;
-
         } elseif ($firstTwo >= 1 && $firstTwo <= 31) {
             return 4;
-
         } else {
             throw new \LogicException();
-
         }
     }
 }

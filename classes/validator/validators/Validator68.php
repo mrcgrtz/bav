@@ -59,24 +59,22 @@ class Validator68 extends ValidatorChain
     protected function getResult()
     {
         switch (strlen($this->account)) {
-        case 10:
-            return $this->account[3] == 9 && $this->validator10->isValid($this->account);
+            case 10:
+                return $this->account[3] == 9 && $this->validator10->isValid($this->account);
 
-        case 9:
-            if ($this->account >= 400000000 && $this->account <= 499999999) {
+            case 9:
+                if ($this->account >= 400000000 && $this->account <= 499999999) {
+                    return false;
+                }
+                return parent::getResult();
+
+            case 6:
+            case 7:
+            case 8:
+                return parent::getResult();
+
+            default:
                 return false;
-
-            }
-            return parent::getResult();
-
-        case 6:
-        case 7:
-        case 8:
-            return parent::getResult();
-
-        default:
-            return false;
-
         }
     }
 }

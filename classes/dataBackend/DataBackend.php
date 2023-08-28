@@ -81,7 +81,6 @@ abstract class DataBackend
     {
         if (! isset($this->instances[$bankID])) {
             $this->instances[$bankID] = $this->getNewBank($bankID);
-
         }
         return $this->instances[$bankID];
     }
@@ -113,10 +112,8 @@ abstract class DataBackend
         try {
             $this->getBank($bankID);
             return true;
-
         } catch (BankNotFoundException $e) {
             return false;
-
         }
     }
 

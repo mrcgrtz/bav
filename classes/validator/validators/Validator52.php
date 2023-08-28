@@ -52,10 +52,8 @@ class Validator52 extends WeightedIterationValidator implements ValidatorBankDep
             return strlen($account) == 10 && $account[0] == 9
                  ? $this->validator20->isValid($account)
                  : parent::isValid($account);
-
         } catch (ValidatorESERException $e) {
             return false;
-
         }
     }
 
@@ -63,10 +61,8 @@ class Validator52 extends WeightedIterationValidator implements ValidatorBankDep
     {
         if ($this->position == $this->getEserChecknumberPosition()) {
             $this->checknumberWeight = $this->getWeight();
-
         } else {
             $this->accumulator += $this->number * $this->getWeight();
-
         }
     }
 

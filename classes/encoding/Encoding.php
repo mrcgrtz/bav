@@ -25,7 +25,6 @@ abstract class Encoding
     {
         if (! $this->isSupported($encoding)) {
             throw new UnsupportedEncodingException($encoding);
-
         }
         $this->enc = $encoding;
     }
@@ -69,13 +68,10 @@ abstract class Encoding
     {
         if (MBEncoding::isSupported($encoding)) {
             return new MBEncoding($encoding);
-
         } elseif (ISO8859Encoding::isSupported($encoding)) {
             return new ISO8859Encoding($encoding);
-
         } else {
             throw new UnsupportedEncodingException($encoding);
-
         }
     }
 }

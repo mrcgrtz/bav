@@ -21,7 +21,7 @@ class ValidatorE3 extends Validator
         $validator = new Validator00($this->bank);
         $this->result = $validator->isValid($this->account);
 
-        if(!$this->result) {
+        if (!$this->result) {
             $validator = new Validator21($this->bank);
             $this->result = $validator->isValid($this->account);
         }

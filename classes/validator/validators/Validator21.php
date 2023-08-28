@@ -36,7 +36,6 @@ class Validator21 extends Validator00
         $result = $this->accumulator;
         while ($result >= 10) {
             $result = $this->crossSum($result);
-
         }
         $result = 10 - $result;
         return (string)$result === $this->getCheckNumber();

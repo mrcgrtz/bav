@@ -60,13 +60,10 @@ class ValidatorChain extends Validator
         foreach ($this->validators as $validator) {
             if (! $this->continueValidation($validator)) {
                 return false;
-
             }
             if ($this->useValidator($validator) && $validator->isValid($this->account)) {
                 return true;
-
             }
-
         }
         return false;
     }

@@ -61,10 +61,8 @@ class Validator73 extends ValidatorChain
 
         if ($this->account[2] == 9) {
             $this->validators = $this->exceptionValidators;
-
         } else {
             $this->validators = $this->defaultValidators;
-
         }
     }
 }

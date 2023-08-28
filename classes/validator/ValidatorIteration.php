@@ -106,7 +106,6 @@ abstract class ValidatorIteration extends Validator
             $this->number = (int)$this->account[$this->position];
             $this->iterationStep();
             $this->position += $stepping;
-
         }
     }
 

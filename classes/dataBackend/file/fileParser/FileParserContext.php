@@ -73,7 +73,6 @@ class FileParserContext
     {
         if (is_null($this->start)) {
             throw new UndefinedFileParserContextException();
-
         }
         return $this->start;
     }
@@ -94,7 +93,6 @@ class FileParserContext
     {
         if (is_null($this->end)) {
             throw new UndefinedFileParserContextException();
-
         }
         return $this->end;
     }

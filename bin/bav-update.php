@@ -17,8 +17,6 @@ try {
     $bav = new BAV();
     $bav->update();
     echo "Bundesbank file downloaded.\n";
-
 } catch (DataBackendException $error) {
     die("Installation failed: {$error->getMessage()}\n");
-
 }

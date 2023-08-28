@@ -42,17 +42,13 @@ class Validator75 extends Validator00
 
         if ($length < 6 || $length > 9) {
             return false;
-
         }
         if ($length == 9) {
             if ($account[0] == 9) {
                 $account = substr($account, 1, 6);
-
             } else {
                 $account = substr($account, 0, 6);
-
             }
-
         }
         return parent::isValid($account);
     }

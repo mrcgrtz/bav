@@ -23,7 +23,7 @@ class ValidatorE4 extends Validator
 
         $this->result = $validator->isValid($this->account);
 
-        if(!$this->result) {
+        if (!$this->result) {
             $validator = new Validator00($this->bank);
             $this->result = $validator->isValid($this->account);
         }

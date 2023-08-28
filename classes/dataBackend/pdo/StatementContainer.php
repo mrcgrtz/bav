@@ -43,7 +43,6 @@ class StatementContainer
     {
         if (! array_key_exists($sql, $this->statements)) {
             $this->statements[$sql] = $this->pdo->prepare($sql);
-
         }
         return $this->statements[$sql];
     }

@@ -84,7 +84,6 @@ class ClassFile
         foreach ($matches[1] as $match) {
             if (! isset($this->neededClasses[$match])) {
                 throw new MissingClassException($this->name, $match);
-
             }
             $this->parent                  = $this->neededClasses[$match];
             $this->neededClasses['parent'] = $this->parent;
@@ -100,7 +99,6 @@ class ClassFile
         foreach (array_merge($matchesNew[1], $matchesStatic[1]) as $match) {
             if (! isset($this->neededClasses[$match])) {
                 throw new MissingClassException($this->name, $match);
-
             }
         }
     }
@@ -114,7 +112,6 @@ class ClassFile
     {
         if (! isset(self::$instances[$path])) {
             self::$instances[$path] = new self($path);
-
         }
         return self::$instances[$path];
     }
@@ -131,13 +128,11 @@ class ClassFile
         $dh         = opendir($dir);
         if (! $dh) {
             throw new ClassFileIOException();
-
         }
         while (($file = readdir($dh)) !== false) {
             $path = $dir.$file;
             if (is_file($path)) {
                 $classFiles[] = self::getClassFile($path);
-
             }
         }
         closedir($dh);
@@ -151,13 +146,11 @@ class ClassFile
     {
         if (func_num_args() == 0) {
             return new $this->name();
-
         }
         $argStr = '';
         $args   = func_get_args();
         for ($i = 0; $i < func_num_args(); $i++) {
             $argStr .= '$args['.$i.'], ';
-
         }
         eval('$instance = new $this->name('.substr($argStr, 0, -2).');');
         return $instance;
@@ -174,7 +167,6 @@ class ClassFile
             $fp                    = fopen($this->path, 'r');
             if (! $fp) {
                 throw new ClassFileIOException();
-
             }
             $this->classDefinition = fread($fp, filesize($this->path));
             fclose($fp);
@@ -184,7 +176,6 @@ class ClassFile
              * delete comments
              */
             $this->classDefinition = preg_replace('_/\*.*\*/_sU', '', $this->classDefinition);
-
         }
         return $this->classDefinition;
     }

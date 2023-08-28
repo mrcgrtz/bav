@@ -65,7 +65,6 @@ class ValidatorD1 extends Validator
         $transformationIndex = $this->getTransformationIndex();
         if (! array_key_exists($transformationIndex, self::$transformation)) {
             return;
-
         }
         $transformationPrefix = self::$transformation[$transformationIndex];
         $this->validator->setNormalizedSize(10 + strlen($transformationPrefix));

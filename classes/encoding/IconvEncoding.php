@@ -83,7 +83,6 @@ class IconvEncoding extends Encoding
         $encoded = iconv($from_encoding, $this->enc, $string);
         if ($encoded === false) {
             throw new EncodingException();
-
         }
         return $encoded;
     }

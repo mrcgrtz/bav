@@ -29,7 +29,6 @@ class FileUtil
     {
         if (is_null($configuration)) {
             $configuration = ConfigurationRegistry::getConfiguration();
-
         }
         $this->configuration = $configuration;
     }
@@ -46,7 +45,6 @@ class FileUtil
         $isRenamed = @rename($source, $destination);
         if ($isRenamed) {
             return;
-
         }
 
         // copy to the target filesystem
@@ -57,13 +55,11 @@ class FileUtil
             throw new FileException(
                 "failed to copy $source to $tempFileOnSameFS."
             );
-
         }
 
         $isUnlinked = unlink($source);
         if (! $isUnlinked) {
             trigger_error("Failed to unlink $source.");
-
         }
 
         $isRenamed = rename($tempFileOnSameFS, $destination);
@@ -71,7 +67,6 @@ class FileUtil
             throw new FileException(
                 "failed to rename $tempFileOnSameFS to $destination."
             );
-
         }
     }
 
@@ -86,12 +81,10 @@ class FileUtil
     {
         if (! is_null($this->configuration->getTempDirectory())) {
             return $this->configuration->getTempDirectory();
-
         }
 
         if (is_null($this->cachedTempDirectory)) {
             $this->cachedTempDirectory = $this->findTempDirectory();
-
         }
         return $this->cachedTempDirectory;
     }
@@ -115,7 +108,6 @@ class FileUtil
         foreach ($tmpDirs as $tmpDir) {
             if ($tmpDir && is_writable($tmpDir)) {
                 return realpath($tmpDir);
-
             }
         }
 
@@ -123,7 +115,6 @@ class FileUtil
         if (file_exists($tempfile)) {
             unlink($tempfile);
             return realpath(dirname($tempfile));
-
         }
 
         throw new NoTempDirectoryException();

@@ -37,7 +37,6 @@ class Validator78 extends Validator00
         $trimedAccount = ltrim($account, "0");
         if (strlen($trimedAccount) === 8) {
             return true;
-
         }
         return parent::isValid($account);
     }

@@ -44,7 +44,6 @@ class ValidatorD8 extends Validator
 
     protected function validate()
     {
-
     }
 
     /**
@@ -54,7 +53,6 @@ class ValidatorD8 extends Validator
     {
         if ($this->account[0] != 0) {
             return $this->validator->isValid($this->account);
-
         }
         $set = (int) substr($this->account, 0, 3);
         return $set >= 1 && $set <= 9;

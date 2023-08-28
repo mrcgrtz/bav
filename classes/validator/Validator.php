@@ -73,7 +73,6 @@ abstract class Validator
     {
         if (is_string($account)) {
             return;
-            
         }
         trigger_error(
             "Only validation of strings are defined."
@@ -100,16 +99,13 @@ abstract class Validator
         try {
             if ($account == null) {
                 return false;
-                
             }
             $this->checkType($account);
             $this->init($account);
             $this->validate();
             return ltrim($account, "0") != "" && $this->getResult();
-
         } catch (ValidatorOutOfBoundsException $e) {
             return false;
-
         }
     }
 
@@ -131,7 +127,6 @@ abstract class Validator
         $this->account = $account;
         if ($this->doNormalization) {
             $this->normalizeAccount($this->normalizedSize);
-
         }
     }
 
@@ -161,12 +156,10 @@ abstract class Validator
     {
         if ($pos >= strlen($this->account) || $pos < -strlen($this->account)) {
             throw new ValidatorOutOfBoundsException("Cannot access offset $pos in String $this->account");
-
         }
 
         if ($pos >= 0) {
             return $pos;
-
         }
         return strlen($this->account) + $pos;
     }
@@ -184,7 +177,6 @@ abstract class Validator
         for ($i = 0; $i < strlen($str_int); $i++) {
             //$sum = bcadd($str_int{$i}, $sum);
             $sum += $str_int[$i];
-
         }
         return $sum;
     }
@@ -198,7 +190,6 @@ abstract class Validator
         $account = (string) $this->account;
         if (strlen($account) > $size) {
             throw new ValidatorOutOfBoundsException("Can't normalize $account to size $size.");
-
         }
         $this->account = str_repeat('0', $size - strlen($account)) . $account;
     }
@@ -213,12 +204,10 @@ abstract class Validator
 
         if (strlen($account) != 8) {
             throw new ValidatorESERException();
-
         }
         $bankID = $this->bank->getBankID();
         if ($bankID[3] != 5) {
             throw new ValidatorESERException();
-
         }
         $blzPart = ltrim(substr($bankID, 4), '0');
 
@@ -226,7 +215,6 @@ abstract class Validator
 
         if (empty($blzPart)) {
             throw new ValidatorESERException();
-
         }
         $accountPart = ltrim(substr($account, 2), '0');
         $eser        = $blzPart.$account[0].$account[1].$accountPart;
@@ -246,11 +234,9 @@ abstract class Validator
 
         if (strlen($account) != 9) {
             throw new ValidatorESERException();
-
         }
         if ($bankID[3] != 5) {
             throw new ValidatorESERException();
-
         }
 
         $blzPart0 = substr($bankID, -4, 2);

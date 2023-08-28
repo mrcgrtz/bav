@@ -23,8 +23,6 @@ try {
     $pdoContainer = new PDODataBackendContainer(PDOFactory::makePDO());
     $pdoContainer->getDataBackend()->install();
     echo "PDO installed.\n";
-
 } catch (DataBackendException $error) {
     die("Installation failed: {$error->getMessage()}\n");
-
 }

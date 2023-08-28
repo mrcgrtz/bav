@@ -48,7 +48,6 @@ class Validator93 extends ValidatorChain
         parent::normalizeAccount($size);
         if (substr($this->account, 0, 4) !== '0000') {
             $this->account = '0000'.substr($this->account, 0, 6);
-
         }
     }
 }

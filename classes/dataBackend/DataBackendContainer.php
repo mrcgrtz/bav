@@ -70,7 +70,6 @@ abstract class DataBackendContainer
         $plan = ConfigurationRegistry::getConfiguration()->getUpdatePlan();
         if ($plan != null && $plan->isOutdated($backend)) {
             $plan->perform($backend);
-
         }
     }
 
@@ -88,7 +87,6 @@ abstract class DataBackendContainer
     {
         if (is_null($this->backend)) {
             $this->backend = $this->buildDataBackend();
-
         }
         return $this->backend;
     }

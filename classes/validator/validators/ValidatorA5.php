@@ -39,7 +39,6 @@ class ValidatorA5 extends ValidatorChain
     {
         if ($validator === $this->validators[1]) {
             return $this->account[0] !== '9';
-
         }
         return true;
     }

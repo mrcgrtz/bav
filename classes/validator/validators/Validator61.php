@@ -40,11 +40,9 @@ class Validator61 extends WeightedIterationValidator
         if ($this->account[8] == 8) {
             $this->setWeights(array(2, 1, 2, 1, 2, 1, 2, 0, 1, 2));
             $this->setEnd(-1);
-
         } else {
             $this->setWeights(array(2, 1));
             $this->setEnd(-4);
-
         }
     }
 

@@ -38,11 +38,9 @@ class Validator63 extends WeightedIterationValidator
     {
         if (parent::isValid($account)) {
             return true;
-
         }
         if (substr($this->account, 0, 3) !== '000') {
             return false;
-
         }
         return parent::isValid(ltrim($account.'00', '0'));
     }

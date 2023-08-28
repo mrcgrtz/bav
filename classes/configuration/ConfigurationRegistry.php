@@ -62,7 +62,6 @@ class ConfigurationRegistry
         $configuration = $locator->locate();
         if ($configuration == null) {
             $configuration = new DefaultConfiguration();
-            
         }
         self::setConfiguration($configuration);
     }

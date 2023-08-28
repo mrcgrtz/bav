@@ -28,7 +28,6 @@ class Validator50 extends Validator06
     {
         if (parent::isValid($account)) {
             return true;
-
         }
         $account = ltrim($account, '0') . '000';
         return strlen($account) <= $this->normalizedSize

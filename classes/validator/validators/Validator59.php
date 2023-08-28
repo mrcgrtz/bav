@@ -35,12 +35,11 @@ class Validator59 extends Validator00
     {
         /*
          * Es ist jedoch zu beachten, dass Kontonummern, die
-         * kleiner als 9-stellig sind,[…] als richtig behandelt werden. 
+         * kleiner als 9-stellig sind,[…] als richtig behandelt werden.
          */
         $trimedAccount = ltrim($this->account, "0");
         if (strlen($trimedAccount) < 9) {
             return ! empty($trimedAccount) && true;
-
         }
         return parent::getResult();
     }

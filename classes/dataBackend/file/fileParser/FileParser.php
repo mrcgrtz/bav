@@ -120,25 +120,20 @@ class FileParser
     {
         if (is_resource($this->fp)) {
             return;
-
         }
         $this->fp = @fopen($this->file, 'r');
         if (! is_resource($this->fp)) {
             if (! file_exists($this->file)) {
                 throw new FileParserNotExistsException($this->file);
-
             } else {
                 throw new FileParserIOException();
-
             }
-
         }
 
 
         $dummyLine = fgets($this->fp);
         if (! $dummyLine) {
             throw new FileParserIOException();
-
         }
         $this->lineLength = strlen($dummyLine);
 
@@ -148,7 +143,6 @@ class FileParser
             throw new FileParserIOException(
                 "Could not read filesize for '$this->file'."
             );
-
         }
         
         // size + 1, because the last line has no line break
@@ -174,7 +168,6 @@ class FileParser
     {
         if (fseek($this->getFileHandle(), 0) === -1) {
             throw new FileParserIOException();
-
         }
     }
 
@@ -188,7 +181,6 @@ class FileParser
     {
         if (fseek($this->getFileHandle(), $line * $this->lineLength + $offset) === -1) {
             throw new FileParserIOException();
-
         }
     }
 
@@ -244,7 +236,6 @@ class FileParser
     {
         if (is_resource($this->fp)) {
             fclose($this->fp);
-
         }
     }
 
@@ -257,7 +248,6 @@ class FileParser
     {
         if ($this->encoding->strlen($line) < self::TYPE_OFFSET + self::TYPE_LENGTH) {
             throw new ParseException("Invalid line length in Line $line.");
-
         }
         $type   = $this->encoding->substr($line, self::TYPE_OFFSET, self::TYPE_LENGTH);
         $bankID = $this->encoding->substr($line, self::BANKID_OFFSET, self::BANKID_LENGTH);
@@ -273,7 +263,6 @@ class FileParser
     {
         if ($this->encoding->strlen($line) < self::ID_OFFSET + self::ID_LENGTH) {
             throw new ParseException("Invalid line length.");
-
         }
         $id   = trim($this->encoding->substr($line, self::ID_OFFSET, self::ID_LENGTH));
         $name = trim($this->encoding->substr($line, self::NAME_OFFSET, self::NAME_LENGTH));
@@ -294,7 +283,6 @@ class FileParser
     {
         if ($this->encoding->strlen($line) < self::TYPE_OFFSET + self::TYPE_LENGTH) {
             throw new ParseException("Invalid line length.");
-
         }
         return $this->encoding->substr($line, self::ISMAIN_OFFSET, 1) === '1';
     }

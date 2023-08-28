@@ -42,12 +42,10 @@ class ValidatorB9b extends WeightedIterationValidator
         $result = $this->accumulator % 11;
         if ((string) $result === $this->getCheckNumber()) {
             return true;
-
         }
         $result += 5;
         if ($result >= 10) {
             $result -= 10;
-
         }
         return (string) $result === $this->getCheckNumber();
     }

@@ -55,9 +55,7 @@ abstract class TransformationIterationValidator extends ValidatorIteration
         if (empty($this->rowIteration)) {
             for ($i = 0; $i < count($matrix); $i++) {
                 $this->rowIteration[] = $i;
-
             }
-
         }
     }
 

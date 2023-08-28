@@ -51,7 +51,6 @@ class ValidatorB8 extends ValidatorChain
     {
         if ($validator !== $this->validator9) {
             return true;
-
         }
         $set1 = substr($this->account, 0, 2);
         $set2 = substr($this->account, 0, 3);

@@ -49,7 +49,6 @@ class AutomaticUpdatePlan extends UpdatePlan
                 $backend->update();
                 if ($isNotice) {
                     trigger_error("bav's bank data was updated sucessfully.", E_USER_NOTICE);
-
                 }
             }
         );

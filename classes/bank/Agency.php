@@ -166,7 +166,6 @@ class Agency
     {
         if (! $this->hasPAN()) {
             throw new UndefinedAttributeAgencyException($this, 'pan');
-
         }
         return $this->pan;
     }
@@ -179,7 +178,6 @@ class Agency
     {
         if (! $this->hasBIC()) {
             throw new UndefinedAttributeAgencyException($this, 'bic');
-
         }
         return $this->bic;
     }

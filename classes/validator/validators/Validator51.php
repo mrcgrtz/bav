@@ -101,17 +101,15 @@ class Validator51 extends ValidatorChain
     {
         if ($validator !== $this->validatorD) {
             return true;
-
         }
         switch ($this->account[9]) {
-        case 7:
-        case 8:
-        case 9:
-            return false;
+            case 7:
+            case 8:
+            case 9:
+                return false;
 
-        default:
-            return true;
-
+            default:
+                return true;
         }
     }
 }

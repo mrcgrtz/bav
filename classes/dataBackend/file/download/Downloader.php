@@ -27,7 +27,6 @@ class Downloader
         $this->handle = curl_init();
         if (!$this->handle) {
             throw new DownloaderException("Failed initializing curl");
-
         }
         curl_setopt($this->handle, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($this->handle, CURLOPT_FOLLOWLOCATION, true);
@@ -71,7 +70,6 @@ class Downloader
         $content = $this->download($uri);
         if (! $content) {
             throw new DataBackendIOException("Failed to download '$uri'.");
-
         }
         return $content;
     }
@@ -90,7 +88,6 @@ class Downloader
         $fp   = fopen($file, 'w');
         if (! ($file && $fp)) {
             throw new DownloaderException("Failed opening a temporary file");
-
         }
         curl_setopt($this->handle, CURLOPT_FILE, $fp);
 
@@ -98,7 +95,6 @@ class Downloader
             fclose($fp);
             unlink($file);
             throw new DownloaderException(curl_error($this->handle), curl_errno($this->handle));
-
         }
         return $file;
     }

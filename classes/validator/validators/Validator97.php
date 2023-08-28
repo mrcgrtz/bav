@@ -40,7 +40,6 @@ class Validator97 extends Validator
     {
         $account = (int) ltrim(substr($this->account, 0, -1), '0');
         $this->result = $account - (int)($account / 11) * 11;
-
     }
 
     /**
