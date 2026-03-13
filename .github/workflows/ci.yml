@@ -53,6 +53,9 @@ jobs:
       - name: Install dependencies
         run: composer require squizlabs/php_codesniffer
       
+      - name: Update BAV data
+        run: php bin/bav-update.php
+      
       - name: Configure MySQL
         run: |
           mysql -h 127.0.0.1 -uroot -e 'SET @@GLOBAL.wait_timeout=1200'
