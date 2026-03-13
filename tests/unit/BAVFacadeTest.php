@@ -31,11 +31,11 @@ class BAVFacadeTest extends TestCase
     /**
      * Tests BAV::getBank();
      *
-     * @expectedException malkusch\bav\BankNotFoundException
      * @see BAV::getBank();
      */
     public function testFailGetBank()
     {
+        $this->expectException(BankNotFoundException::class);
         $bav = new BAV();
         $bav->getBank("12345678");
     }
@@ -43,11 +43,11 @@ class BAVFacadeTest extends TestCase
     /**
      * Tests BAV::getAgencies();
      *
-     * @expectedException malkusch\bav\BankNotFoundException
      * @see BAV::getAgencies();
      */
     public function testFailGetAgencies()
     {
+        $this->expectException(BankNotFoundException::class);
         $bav = new BAV();
         $bav->getAgencies("12345678");
     }
@@ -95,11 +95,11 @@ class BAVFacadeTest extends TestCase
     /**
      * Tests BAV::getMainAgency();
      *
-     * @expectedException malkusch\bav\BankNotFoundException
      * @see BAV::getMainAgency();
      */
     public function testFailGetMainAgency()
     {
+        $this->expectException(BankNotFoundException::class);
         $bav = new BAV();
         $bav->getMainAgency("12345678");
     }

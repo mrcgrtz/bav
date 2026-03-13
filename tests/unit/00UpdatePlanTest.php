@@ -67,20 +67,20 @@ class UpdatePlanTest extends TestCase
     }
 
     /**
-     * @expectedException \PHPUnit\Framework\Error\Warning
      */
     public function testLogUpdatePlan()
     {
+        $this->expectException(\PHPUnit\Framework\Error\Warning::class);
         $updatePlan = new LogUpdatePlan();
         $updatePlan->perform(new FileDataBackend());
     }
 
     /**
-     * @expectedException \PHPUnit\Framework\Error\Notice
      * @medium
      */
     public function testAutomaticUpdatePlanNotice()
     {
+        $this->expectException(\PHPUnit\Framework\Error\Notice::class);
         $fileUtil = new FileUtil();
         $file = tempnam($fileUtil->getTempDirectory(), 'bavtest');
         $updatePlan = new AutomaticUpdatePlan();
@@ -88,11 +88,11 @@ class UpdatePlanTest extends TestCase
     }
 
     /**
-     * @expectedException \PHPUnit\Framework\Error\Notice
      * @medium
      */
     public function testAutomaticUpdatePlan()
     {
+        $this->expectException(\PHPUnit\Framework\Error\Notice::class);
         $fileUtil = new FileUtil();
         $file = tempnam($fileUtil->getTempDirectory(), 'bavtest');
         touch($file, strtotime("-1 year"));

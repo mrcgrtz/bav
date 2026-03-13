@@ -31,10 +31,10 @@ class ConfigurationLocatorTest extends TestCase
      * locate() should throw an exception
      * 
      * @see               ConfigurationLocator::locate();
-     * @expectedException malkusch\bav\ConfigurationException
      */
     public function testlocateThrowsException()
     {
+        $this->expectException(ConfigurationException::class);
         $locator = new ConfigurationLocator(
             array(
             __DIR__ . "/../data/no_configuration.php"

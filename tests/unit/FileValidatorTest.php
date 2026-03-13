@@ -26,19 +26,19 @@ class FileValidatorTest extends TestCase
     }
 
     /**
-     * @expectedException malkusch\bav\InvalidFilesizeException
      */
     public function testInvalidFileSize()
     {
+        $this->expectException(InvalidFilesizeException::class);
         $validator = new FileValidator();
         $validator->validate(__FILE__);
     }
 
     /**
-     * @expectedException malkusch\bav\InvalidLineLengthException
      */
     public function testInvalidLineLength()
     {
+        $this->expectException(InvalidLineLengthException::class);
         $backend = new FileDataBackend();
         $file = $backend->getFile();
 
@@ -53,10 +53,10 @@ class FileValidatorTest extends TestCase
     }
 
     /**
-     * @expectedException malkusch\bav\InvalidLineLengthException
      */
     public function testNotConstantLineLength()
     {
+        $this->expectException(InvalidLineLengthException::class);
         $backend = new FileDataBackend();
         $file = $backend->getFile();
 
@@ -71,10 +71,10 @@ class FileValidatorTest extends TestCase
     }
 
     /**
-     * @expectedException malkusch\bav\FieldException
      */
     public function testInvalidFirstLineContent()
     {
+        $this->expectException(FieldException::class);
         $backend = new FileDataBackend();
         $file = $backend->getFile();
 

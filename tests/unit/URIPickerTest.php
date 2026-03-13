@@ -48,10 +48,10 @@ class URIPickerTest extends TestCase
     /**
      * Tests pickURI()
      *
-     * @expectedException malkusch\bav\URIPickerException
      */
     public function testFailPickURI()
     {
+        $this->expectException(URIPickerException::class);
         $picker = new DOMURIPicker();
 
         $html = "XXX";

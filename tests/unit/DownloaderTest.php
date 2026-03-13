@@ -85,11 +85,11 @@ class DownloaderTest extends TestCase
     /**
      * Tests failing downloadContent();
      * 
-     * @expectedException malkusch\bav\DownloaderException
      * @see Downloader::downloadContent()
      */
     public function testFailDownloadContent()
     {
+        $this->expectException(DownloaderException::class);
         $downloader = new Downloader();
         $downloader->downloadContent("http://example.org/XXX");
     }
@@ -97,11 +97,11 @@ class DownloaderTest extends TestCase
     /**
      * Tests failing downloadFile();
      * 
-     * @expectedException malkusch\bav\DownloaderException
      * @see Downloader::downloadFile()
      */
     public function testFailDownloadFile()
     {
+        $this->expectException(DownloaderException::class);
         $downloader = new Downloader();
         $file = $downloader->downloadFile("http://example.org/XXX");
     }
