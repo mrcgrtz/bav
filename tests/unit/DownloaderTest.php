@@ -23,7 +23,7 @@ class DownloaderTest extends TestCase
     public function provideTestURIs()
     {
         return array(
-            array("http://www.gnu.org/licenses/gpl-2.0.txt", "b234ee4d69f5fce4486a80fdaf4a4263")
+            array("https://www.gnu.org/licenses/old-licenses/gpl-2.0.txt", "b234ee4d69f5fce4486a80fdaf4a4263")
         );
     }
 
