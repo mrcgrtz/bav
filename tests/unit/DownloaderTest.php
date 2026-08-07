@@ -23,7 +23,7 @@ class DownloaderTest extends TestCase
     public function provideTestURIs()
     {
         return array(
-            array("http://www.gnu.org/licenses/gpl-2.0.txt", "b234ee4d69f5fce4486a80fdaf4a4263")
+            array("https://www.gnu.org/licenses/old-licenses/gpl-2.0.txt", "b234ee4d69f5fce4486a80fdaf4a4263")
         );
     }
 
@@ -85,11 +85,11 @@ class DownloaderTest extends TestCase
     /**
      * Tests failing downloadContent();
      * 
-     * @expectedException malkusch\bav\DownloaderException
      * @see Downloader::downloadContent()
      */
     public function testFailDownloadContent()
     {
+        $this->expectException(DownloaderException::class);
         $downloader = new Downloader();
         $downloader->downloadContent("http://example.org/XXX");
     }
@@ -97,11 +97,11 @@ class DownloaderTest extends TestCase
     /**
      * Tests failing downloadFile();
      * 
-     * @expectedException malkusch\bav\DownloaderException
      * @see Downloader::downloadFile()
      */
     public function testFailDownloadFile()
     {
+        $this->expectException(DownloaderException::class);
         $downloader = new Downloader();
         $file = $downloader->downloadFile("http://example.org/XXX");
     }

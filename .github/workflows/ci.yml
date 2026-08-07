@@ -1,0 +1,74 @@
+name: CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        php-version: ['8.1', '8.2', '8.3', '8.4']
+    
+    services:
+      mysql:
+        image: mysql:5.7
+        env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+          MYSQL_DATABASE: bav
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
+    
+    env:
+      PDO_DSN: "mysql:host=127.0.0.1;dbname=bav"
+      PDO_USER: root
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-version }}
+          extensions: pdo, pdo_mysql, mbstring, iconv
+          coverage: none
+      
+      - name: Cache Composer dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.composer/cache
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-composer-
+      
+      - name: Install dependencies
+        run: composer require squizlabs/php_codesniffer
+      
+      - name: Update BAV data
+        run: php bin/bav-update.php
+      
+      - name: Configure MySQL
+        run: |
+          mysql -h 127.0.0.1 -uroot -e 'SET @@GLOBAL.wait_timeout=1200'
+          mysql -h 127.0.0.1 -uroot -e 'CREATE DATABASE IF NOT EXISTS bav;'
+      
+      - name: Install test database
+        run: php tests/bin/test-install.php
+      
+      - name: Run unit tests
+        run: vendor/bin/phpunit tests/unit/
+      
+      - name: Run integration tests
+        run: vendor/bin/phpunit --exclude-group large tests/unit-large/
+      
+      - name: Run PHP CodeSniffer
+        run: vendor/bin/phpcs --standard=PSR2 classes/ bin/ docs/example.php tests/classes/ tests/bin/ tests/bootstrap.php

@@ -121,10 +121,10 @@ class ContextValidationTest extends TestCase
      * Test an invalid context
      * 
      * @see ContextValidation::getValidAccountFilterCallback()
-     * @expectedException malkusch\bav\InvalidContextException
      */
     public function testFilterInvalidContext()
     {
+        $this->expectException(InvalidContextException::class);
         filter_var(
             "0",
             FILTER_CALLBACK,
@@ -136,10 +136,10 @@ class ContextValidationTest extends TestCase
      * Test an invalid context
      * 
      * @see ContextValidation::isValidAccount()
-     * @expectedException malkusch\bav\InvalidContextException
      */
     public function testInvalidContext()
     {
+        $this->expectException(InvalidContextException::class);
         $this->validation->isValidAccount("12345");
     }
 }

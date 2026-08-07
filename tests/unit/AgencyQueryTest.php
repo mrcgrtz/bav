@@ -66,10 +66,10 @@ class AgencyQueryTest extends TestCase
 
     /**
      * @dataProvider provideBackends
-     * @expectedException malkusch\bav\MissingAttributesDataBackendIOException
      */
     public function testNoID(SQLDataBackend $backend)
     {
+        $this->expectException(MissingAttributesDataBackendIOException::class);
         $result = $backend->getAgencies(
             'SELECT name, postcode, city, shortTerm, pan, bic, bank FROM bav_agency LIMIT 1'
         );

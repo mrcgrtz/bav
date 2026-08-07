@@ -29,10 +29,8 @@ class Validator74_PR18_Test extends TestCase
      */
     public function testAllHalfDecades($account, $expected)
     {
-        $backend = $this->getMock("malkusch\bav\FileDataBackend");
-        $bank = $this->getMock(
-                "malkusch\bav\Bank", array(), array($backend, 1, 74));
-        
+        $bank = $this->createMock(Bank::class);
+
         $validator = new Validator74($bank);
         $this->assertEquals($expected, $validator->isValid($account));
     }

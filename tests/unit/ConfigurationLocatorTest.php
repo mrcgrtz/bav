@@ -31,10 +31,10 @@ class ConfigurationLocatorTest extends TestCase
      * locate() should throw an exception
      * 
      * @see               ConfigurationLocator::locate();
-     * @expectedException malkusch\bav\ConfigurationException
      */
     public function testlocateThrowsException()
     {
+        $this->expectException(ConfigurationException::class);
         $locator = new ConfigurationLocator(
             array(
             __DIR__ . "/../data/no_configuration.php"
@@ -94,7 +94,7 @@ class ConfigurationLocatorTest extends TestCase
         $this->assertInstanceOf("malkusch\bav\Configuration", $configuration);
         $this->assertEquals("test", $configuration->getTempDirectory());
         
-        restore_include_path();
+        ini_restore('include_path');
     }
     
     /**

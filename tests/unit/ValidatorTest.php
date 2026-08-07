@@ -124,6 +124,7 @@ class ValidatorTest extends TestCase
      */
     public function testAccountLength(Bank $bank, $account)
     {
+        $this->expectNotToPerformAssertions();
         $bank->isValid($account);
     }
 
@@ -151,10 +152,10 @@ class ValidatorTest extends TestCase
      * 
      * @see Validator::isValid()
      * @dataProvider provideBanks
-     * @expectedException \PHPUnit\Framework\Error\Warning
      */
     public function testWarningForIsValidWithInt(Bank $bank)
     {
+        $this->expectException(\PHPUnit\Framework\Error\Warning::class);
         $intAccount = 0020012357;
         $bank->isValid($intAccount);
     }

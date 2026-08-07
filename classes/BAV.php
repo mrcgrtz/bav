@@ -43,7 +43,7 @@ class BAV
      *
      * @see ConfigurationRegistry
      */
-    public function __construct(Configuration $configuration = null)
+    public function __construct(?Configuration $configuration = null)
     {
         if (is_null($configuration)) {
             $configuration = ConfigurationRegistry::getConfiguration();
