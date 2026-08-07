@@ -18,6 +18,7 @@ class FileValidatorTest extends TestCase
 
     public function testValidate()
     {
+        $this->expectNotToPerformAssertions();
         $backend = new FileDataBackend();
         $file = $backend->getFile();
 

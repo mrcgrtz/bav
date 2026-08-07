@@ -23,9 +23,8 @@ class ValidatorE4Test extends TestCase
      */
     public function testE3($account, $expected)
     {
-        $backend = $this->getMock('malkusch\bav\FileDataBackend');
-        $bank = $this->getMock('malkusch\bav\Bank', [], [$backend, 1, 1]);
-        
+        $bank = $this->createMock(Bank::class);
+
         $validator = new ValidatorE4($bank);
         $this->assertEquals($expected, $validator->isValid($account));
     }

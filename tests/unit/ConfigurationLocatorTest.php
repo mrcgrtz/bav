@@ -94,7 +94,7 @@ class ConfigurationLocatorTest extends TestCase
         $this->assertInstanceOf("malkusch\bav\Configuration", $configuration);
         $this->assertEquals("test", $configuration->getTempDirectory());
         
-        restore_include_path();
+        ini_restore('include_path');
     }
     
     /**

@@ -124,6 +124,7 @@ class ValidatorTest extends TestCase
      */
     public function testAccountLength(Bank $bank, $account)
     {
+        $this->expectNotToPerformAssertions();
         $bank->isValid($account);
     }
 

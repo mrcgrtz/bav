@@ -27,10 +27,8 @@ class Validator66_PR18_Test extends TestCase
      */
     public function testRemainer0and1($account, $expected)
     {
-        $backend = $this->getMock("malkusch\bav\FileDataBackend");
-        $bank = $this->getMock(
-                "malkusch\bav\Bank", array(), array($backend, 1, 66));
-        
+        $bank = $this->createMock(Bank::class);
+
         $validator = new Validator66($bank);
         $this->assertEquals($expected, $validator->isValid($account));
     }
