@@ -17,7 +17,7 @@
         "files": ["autoloader/autoloader.php"]
     },
     "require": {
-        "php": ">=7.2",
+        "php": ">=8.1",
         "bmdevel/php-index": "~0.3"
     },
     "suggest": {
